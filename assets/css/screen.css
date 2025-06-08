@@ -1403,6 +1403,101 @@ Search                         LOGO                    Login Subscribe
     background-color: #fff;
 }
 
+/* Landing layout mit Profilbild */
+.gh-header.is-classic .gh-landing-container {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.gh-landing-content {
+    flex: 1;
+}
+
+.gh-landing-content .gh-header-title {
+    text-align: left;
+    margin-bottom: 16px;
+}
+
+.gh-landing-description {
+    font-size: 1.8rem;
+    line-height: 1.5;
+    color: var(--color-secondary-text);
+    margin-bottom: 32px;
+    max-width: 500px;
+    text-align: left;
+}
+
+.gh-landing-image {
+    flex-shrink: 0;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid var(--ghost-accent-color, var(--color-border));
+    position: relative;
+}
+
+.gh-landing-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    inset: 0;
+}
+
+.gh-landing-image svg {
+    width: 60%;
+    height: 60%;
+    margin: 20%;
+    color: var(--color-secondary-text);
+}
+
+.gh-landing-content .gh-form {
+    max-width: 400px;
+}
+
+/* Responsive Design für Landing */
+@media (max-width: 767px) {
+    .gh-landing-container {
+        flex-direction: column-reverse;
+        text-align: center;
+        gap: 32px;
+    }
+    
+    .gh-landing-content {
+        text-align: center;
+    }
+    
+    .gh-landing-content .gh-header-title {
+        text-align: center;
+    }
+    
+    .gh-landing-description {
+        text-align: center;
+        max-width: 100%;
+    }
+    
+    .gh-landing-image {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .gh-landing-image {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .gh-landing-description {
+        font-size: 1.6rem;
+    }
+}
+
 /* 9. CTA
 /* ---------------------------------------------------------- */
 

@@ -1,7 +1,7 @@
 {
     "name": "lukas-zangerl-coaching-dynamics",
     "description": "My german ghost theme",
-    "version": "1.0",
+    "version": "1.0.0",
     "engines": {
         "ghost": ">=5.0.0"
     },
@@ -31,7 +31,6 @@
         "Lukas Zangerl",
         "Lukas Zangerl Coaching Dynamics",
         "Lukas Zangerl Coaching",
-        "Lukas Zangerl Coaching Dynamics",
         "Trainer Lukas Zangerl",
         "Produktivität Lukas Zangerl",
         "Produktivität-Werkstatt Lukas Zangerl"

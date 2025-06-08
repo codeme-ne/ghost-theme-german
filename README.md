@@ -1,65 +1,76 @@
-# Source
+# Themestruktur
 
-The default theme for [Ghost](http://github.com/tryghost/ghost/). This is the latest development version of Source! If you're just looking to download the latest release, head over to the [releases](https://github.com/TryGhost/Source/releases) page.
+## Hauptdateien und ihre Funktionen
 
-&nbsp;
+Das Theme basiert auf dem Source-Theme von Ghost und verwendet Handlebars (.hbs) für Templates. Hier ist eine Übersicht der wichtigsten Dateien und ihrer Funktionen:
 
-# First time using a Ghost theme?
+### Root-Verzeichnis
+- `default.hbs` - Die Haupttemplate-Datei, die das grundlegende HTML-Gerüst definiert und Header/Footer einbindet
+- `home.hbs` - Template für die Startseite
+- `index.hbs` - Template für Beitragsübersichten/Listenansichten
+- `post.hbs` - Template für einzelne Blogbeiträge
+- `page.hbs` - Template für statische Seiten
+- `tag.hbs` - Template für Tag-Archive (z.B. alle Beiträge mit einem bestimmten Tag)
+- `author.hbs` - Template für Autoren-Archive (z.B. alle Beiträge eines bestimmten Autors)
+- `gulpfile.js` - Konfigurationsdatei für Gulp (Build-Tool für CSS/JS-Kompilierung)
+- `package.json` - NPM-Paketdatei mit Theme-Metadaten und Abhängigkeiten
 
-Ghost uses a simple templating language called [Handlebars](http://handlebarsjs.com/) for its themes.
+### Verzeichnisstruktur
 
-This theme has lots of code comments to help explain what's going on just by reading the code. Once you feel comfortable with how everything works, we also have full [theme API documentation](https://ghost.org/docs/themes/) which explains every possible Handlebars helper and template.
+#### /partials
+Enthält wiederverwendbare Template-Teile, die in andere Templates eingebunden werden:
 
-**The main files are:**
+- `/components` - Größere UI-Komponenten wie Navigation, Footer, Header usw.
+- `/icons` - SVG-Icons, die im Theme verwendet werden (über Handlebars eingebunden)
+- `/typography` - Schriftarten-Definitionen für verschiedene Stiloptionen
 
-- `default.hbs` - The parent template file, which includes your global header/footer
-- `home.hbs` - The homepage
-- `index.hbs` - The main template to generate a list of posts
-- `post.hbs` - The template used to render individual posts
-- `page.hbs` - Used for individual pages
-- `tag.hbs` - Used for tag archives, eg. "all posts tagged with `news`"
-- `author.hbs` - Used for author archives, eg. "all posts written by Jamie"
+#### /assets
+Enthält alle statischen Ressourcen:
 
-One neat trick is that you can also create custom one-off templates by adding the slug of a page to a template file. For example:
+- `/css` - Quell-CSS-Dateien (werden kompiliert zu `/built/screen.css`)
+- `/js` - JavaScript-Dateien
+  - `/lib` - Externe JavaScript-Bibliotheken (PhotoSwipe, imagesloaded, reframe)
+  - `/dropdown.js` - Navigation-Dropdown-Funktionalität
+  - `/lightbox.js` - Bild-Lightbox-Funktionalität
+  - `/pagination.js` - Endlos-Scroll und Paginierung
+  - `/main.js` - Allgemeine JavaScript-Funktionen
+- `/built` - Kompilierte und minifizierte CSS/JS-Dateien (werden automatisch erstellt)
+- `/fonts` - Schriftarten-Dateien
+- `/images` - Bilder für das Theme
 
-- `page-about.hbs` - Custom template for an `/about/` page
-- `tag-news.hbs` - Custom template for `/tag/news/` archive
-- `author-ali.hbs` - Custom template for `/author/ali/` archive
+## Wie alles zusammenhängt
 
+1. **Template-Hierarchie**:
+   - `default.hbs` ist das Basis-Template, das das HTML-Grundgerüst definiert
+   - Alle anderen Templates (home.hbs, post.hbs usw.) werden in default.hbs eingebunden
+   - Die Templates verwenden Partials aus dem `/partials`-Verzeichnis
 
-# Development
+2. **CSS und JavaScript**:
+   - Die Quelldateien liegen in `/assets/css` und `/assets/js`
+   - Gulp kompiliert diese zu `/assets/built/screen.css` und `/assets/built/source.js`
+   - Diese werden dann in `default.hbs` eingebunden
 
-Source styles are compiled using Gulp/PostCSS to polyfill future CSS spec. You'll need [Node](https://nodejs.org/), [Yarn](https://yarnpkg.com/) and [Gulp](https://gulpjs.com) installed globally. After that, from the theme's root directory:
+3. **Theme-Einstellungen**:
+   - Werden in `package.json` unter `config.custom` definiert
+   - Zugänglich in Templates über `@custom`-Variablen (z.B. `{{@custom.title_font}}`)
 
-```bash
-# install dependencies
-yarn install
+4. **Komponenten-Einbindung**:
+   - Partials werden mit `{{> "partial-name"}}` eingebunden
+   - Icons werden mit `{{> "icons/icon-name"}}` eingebunden
 
-# run development server
-yarn dev
-```
+## Entwicklung und Anpassung
 
-Now you can edit `/assets/css/` files, which will be compiled to `/assets/built/` automatically.
+Um am Theme zu arbeiten:
 
-The `zip` Gulp task packages the theme files into `dist/<theme-name>.zip`, which you can then upload to your site.
+1. Installiere Node.js und Yarn
+2. Führe `yarn install` aus, um Abhängigkeiten zu installieren
+3. Führe `yarn dev` aus, um den Entwicklungsserver zu starten
+4. Ändere Dateien in `/assets/css` oder `/assets/js` - sie werden automatisch kompiliert
+5. Erstelle eine `.zip`-Datei mit `yarn zip` zum Hochladen in Ghost
 
-```bash
-# create .zip file
-yarn zip
-```
+### Tipps für Anpassungen:
 
-# PostCSS Features Used
-
-- Autoprefixer - Don't worry about writing browser prefixes of any kind, it's all done automatically with support for the latest 2 major versions of every browser.
-
-
-# SVG Icons
-
-Source uses inline SVG icons, included via Handlebars partials. You can find all icons inside `/partials/icons`. To use an icon just include the name of the relevant file, eg. To include the SVG icon in `/partials/icons/rss.hbs` - use `{{> "icons/rss"}}`.
-
-You can add your own SVG icons in the same manner.
-
-
-# Copyright & License
-
-Copyright (c) 2013-2025 Ghost Foundation - Released under the [MIT license](LICENSE).
+- Für neue Seiten-Templates: Erstelle `page-[slug].hbs` (z.B. `page-about.hbs` für /about/)
+- Für neue Tag-Templates: Erstelle `tag-[slug].hbs` (z.B. `tag-news.hbs` für /tag/news/)
+- Für neue Komponenten: Erstelle Dateien in `/partials/components/`
+- Für neue Icons: Füge SVG-Dateien zu `/partials/icons/` hinzu
