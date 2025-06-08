@@ -63,10 +63,23 @@
 
         {{!-- Landing layout --}}
         {{#match headerStyle "Landing"}}
-            <h1 class="gh-header-title is-title">{{#if @custom.header_text}}{{@custom.header_text}}{{else}}{{@site.description}}{{/if}}</h1>
-            {{> "email-subscription" email_field_id="header-email"}}
+            <div class="gh-landing-container">
+                <div class="gh-landing-content">
+                    <h1 class="gh-header-title is-title">
+                        <span class="gh-landing-greeting">👋 Hallo, ich heiße <span class="gh-landing-name">Lukas</span>.</span>
+                        <span class="gh-landing-tagline">Ich war vorher Pilot und bin jetzt NLP-Trainer und Produktivitäts-Coach.</span>
+                    </h1>
+                    <p class="gh-landing-description">
+                        💌 Melde dich für meinen <strong>wöchentlichen Newsletter</strong> an und erhalte umsetzbare Produktivitäts-Tipps und exklusive Bonus-Dokumente direkt in dein Postfach.
+                    </p>
+                    {{> "email-subscription" email_field_id="header-email"}}
+                </div>
+                <div class="gh-landing-image">
+                    <img src="https://www.produktiv.me/content/images/2025/06/Lukas-Zangerl-Produktivit--ts-Coach-2025.jpeg" alt="Lukas Zangerl Produktivitäts-Coach">
+                </div>
+            </div>
         {{/match}}
-
+        
         {{!-- Search layout --}}
         {{#match headerStyle "Search"}}
             <h1 class="gh-header-title is-title">{{#if @custom.header_text}}{{@custom.header_text}}{{else}}{{@site.description}}{{/if}}</h1>
