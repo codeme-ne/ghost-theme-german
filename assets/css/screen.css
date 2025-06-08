@@ -1498,6 +1498,55 @@ Search                         LOGO                    Login Subscribe
     }
 }
 
+/* Erweiterte Landing-Styles für unterschiedliche Textgrößen */
+.gh-landing-content .gh-header-title {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.gh-landing-greeting {
+    font-size: 3.2rem;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.gh-landing-name {
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 4px;
+    text-decoration-color: var(--ghost-accent-color);
+}
+
+.gh-landing-tagline {
+    font-size: 4.8rem;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+/* Responsive Anpassungen */
+@media (max-width: 991px) {
+    .gh-landing-greeting {
+        font-size: 2.4rem;
+    }
+    
+    .gh-landing-tagline {
+        font-size: 3.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .gh-landing-greeting {
+        font-size: 2rem;
+    }
+    
+    .gh-landing-tagline {
+        font-size: 2.4rem;
+    }
+}
+
 /* 9. CTA
 /* ---------------------------------------------------------- */
 
